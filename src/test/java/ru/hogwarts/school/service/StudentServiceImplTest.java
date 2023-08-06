@@ -1,17 +1,14 @@
 package ru.hogwarts.school.service;
 
 import org.junit.jupiter.api.Test;
-import ru.hogwarts.school.constant.StudentServiceConstants;
 import ru.hogwarts.school.model.Student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ru.hogwarts.school.constant.FacultyServiceConstants.*;
-import static ru.hogwarts.school.constant.FacultyServiceConstants.COLLECTIONS_FACULTIES_BY_RED_COLOR;
 import static ru.hogwarts.school.constant.StudentServiceConstants.*;
 
-public class StudentServiceTest {
+public class StudentServiceImplTest {
 
-    private final StudentService out = new StudentService();
+    private final StudentServiceImpl out = new StudentServiceImpl();
 
     @Test
 

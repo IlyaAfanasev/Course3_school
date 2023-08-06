@@ -1,19 +1,14 @@
 package ru.hogwarts.school.service;
 
-import net.bytebuddy.build.ToStringPlugin;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.hogwarts.school.constant.FacultyServiceConstants;
 import ru.hogwarts.school.model.Faculty;
-import ru.hogwarts.school.model.Student;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static ru.hogwarts.school.constant.FacultyServiceConstants.*;
-import static ru.hogwarts.school.constant.StudentServiceConstants.*;
 
-public class FacultyServiceTest {
+public class FacultyServiceImplTest {
 
-    private final FacultyService out = new FacultyService();
+    private final FacultyServiceImpl out = new FacultyServiceImpl();
 
     @Test
 

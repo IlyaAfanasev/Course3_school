@@ -1,11 +1,12 @@
 package ru.hogwarts.school.controller;
 
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
+import ru.hogwarts.school.service.StudentServiceImpl;
 
 import java.util.Collection;
 
@@ -65,7 +66,13 @@ public class StudentController {
             return ResponseEntity.ok(studentService.getStudentsByAge(age));
         }
         return ResponseEntity.notFound().build();
-
     }
+
+    @DeleteMapping
+    public ResponseEntity clear() {
+        studentService.clear();
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
 
 }

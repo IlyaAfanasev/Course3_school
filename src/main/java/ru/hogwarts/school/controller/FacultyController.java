@@ -1,11 +1,12 @@
 package ru.hogwarts.school.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.service.FacultyService;
+import ru.hogwarts.school.service.FacultyServiceImpl;
 import java.util.Collection;
-import java.util.Collections;
 
 
 @RestController
@@ -64,6 +65,12 @@ public class FacultyController {
         return ResponseEntity.ok(facultyService.getFacultiesByColor(color));
     }
         return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity clear() {
+        facultyService.clear();
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }
