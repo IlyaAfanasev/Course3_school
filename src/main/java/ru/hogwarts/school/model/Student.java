@@ -1,6 +1,9 @@
 package ru.hogwarts.school.model;
 
+import javax.persistence.Entity;
 import java.util.Objects;
+
+@Entity
 
 public class Student {
     private Long id;
