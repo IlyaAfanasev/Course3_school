@@ -29,7 +29,7 @@ public class StudentServiceImpl implements StudentService {
 
     public Optional<Student> getStudent(Long id) {
         if (!studentRepository.existsById(id)) {
-            throw new StudentNotFoundException();
+            throw new StudentNotFoundException("Student not found");
         }
         return studentRepository.findById(id);
     }
@@ -37,18 +37,21 @@ public class StudentServiceImpl implements StudentService {
     public Student editStudent(Student student) {
 
         if (!studentRepository.existsById(student.getId())) {
-            throw new StudentNotFoundException();
+            throw new StudentNotFoundException("Student not found");
         }
 
         return studentRepository.save(student);
 
     }
 
-    public Student deleteStudent(Long id) {
+    public Optional<Student> deleteStudent(Long id) {
+        Optional<Student> student;
         if (!studentRepository.existsById(id)) {
-            throw new StudentNotFoundException();
+            throw new StudentNotFoundException("Student not found");
         }
-        return null;
+        student = studentRepository.findById(id);
+        studentRepository.deleteById(id);
+        return student;
     }
 
     public Collection<Student> getAll() {

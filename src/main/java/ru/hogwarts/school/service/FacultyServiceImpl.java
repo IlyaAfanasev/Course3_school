@@ -26,7 +26,7 @@ public class FacultyServiceImpl implements FacultyService {
 
     public Optional<Faculty> getFaculty(Long id) {
         if (!facultyRepository.existsById(id)) {
-            throw new FacultyNotFoundException();
+            throw new FacultyNotFoundException("Faculty not found");
         }
         return facultyRepository.findById(id);
 
@@ -34,7 +34,7 @@ public class FacultyServiceImpl implements FacultyService {
 
     public Faculty editFaculty(Faculty faculty) {
         if (!facultyRepository.existsById(faculty.getId())) {
-            throw new FacultyNotFoundException();
+            throw new FacultyNotFoundException("Faculty not found");
         }
         return facultyRepository.save(faculty);
     }
@@ -42,7 +42,7 @@ public class FacultyServiceImpl implements FacultyService {
     public Optional<Faculty> deleteFaculty(Long id) {
         Optional<Faculty> faculty;
         if (!facultyRepository.existsById(id)) {
-            throw new FacultyNotFoundException();
+            throw new FacultyNotFoundException("Faculty not found");
         }
         faculty = facultyRepository.findById(id);
         facultyRepository.deleteById(id);

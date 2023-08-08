@@ -15,7 +15,7 @@ public class StudentServiceConstants {
     public static final Student STUDENT_3 = new Student(3L, "Student3", 10);
 
     public static final Collection<Student> COLLECTIONS_STUDENTS_BY_AGE_10
-            = new ArrayList<>(List.of(STUDENT_3,STUDENT_3));
+            = new ArrayList<>(List.of(STUDENT_1,STUDENT_3));
 
     public static final Collection<Student> COLLECTIONS_STUDENTS
             = Collections.unmodifiableList(new ArrayList<>(List.of(STUDENT_1, STUDENT_2, STUDENT_3)));

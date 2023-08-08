@@ -13,7 +13,7 @@ public interface StudentService {
 
     Student editStudent(Student student);
 
-    Student deleteStudent(Long id);
+    Optional<Student> deleteStudent(Long id);
 
     Collection<Student> getAll();
 
