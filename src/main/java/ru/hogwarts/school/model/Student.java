@@ -2,6 +2,8 @@ package ru.hogwarts.school.model;
 
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,15 +18,10 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
-    private final String name;
+    private  String name;
 
-    private final int age;
+    private  int age;
 
-    public Student(Long id, String name, int age) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-    }
 
     public Long getId() {
         return id;
