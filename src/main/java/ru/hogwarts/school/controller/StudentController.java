@@ -34,6 +34,25 @@ public class StudentController {
         return ResponseEntity.ok(student);
     }
 
+    @GetMapping
+
+    public Collection<Student> geAll(@RequestParam(required = false) Integer fromAge,
+                                     @RequestParam(required = false) Integer toAge) {
+        if (fromAge != null && toAge != null) {
+            return studentService.findByAgeBetween(fromAge,toAge);
+        }
+
+        return studentService.getAll();
+    }
+
+    @GetMapping("/age")
+    public ResponseEntity<Collection<Student>> getStudentsByAge(@RequestParam int age) {
+        if (age > 0) {
+            return ResponseEntity.ok(studentService.getStudentsByAge(age));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @PutMapping
     public ResponseEntity<Student> editFaculty(@RequestBody Student student) {
         Student foundStudent = studentService.editStudent(student);
@@ -47,20 +66,6 @@ public class StudentController {
 
 
         return ResponseEntity.ok(student);
-    }
-
-    @GetMapping
-
-    public Collection<Student> geAll() {
-        return studentService.getAll();
-    }
-
-    @GetMapping("/age")
-    public ResponseEntity<Collection<Student>> getStudentsByAge(@RequestParam int age) {
-        if (age > 0) {
-            return ResponseEntity.ok(studentService.getStudentsByAge(age));
-        }
-        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping

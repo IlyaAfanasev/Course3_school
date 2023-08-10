@@ -32,6 +32,22 @@ public class FacultyServiceImpl implements FacultyService {
 
     }
 
+    public Collection<Faculty> getAll() {
+
+        return facultyRepository.findAll();
+    }
+
+    public Collection<Faculty> getFacultiesByColor(String color) {
+
+        return facultyRepository.findAll().stream()
+                .filter(f -> f.getColor().equals(color))
+                .collect(Collectors.toList());
+    }
+
+    public Collection<Faculty> getByNameOrColor(String name, String color) {
+        return facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(name, color);
+    }
+
     public Faculty editFaculty(Faculty faculty) {
         if (!facultyRepository.existsById(faculty.getId())) {
             throw new FacultyNotFoundException("Faculty not found");
@@ -51,19 +67,7 @@ public class FacultyServiceImpl implements FacultyService {
 
     }
 
-    public Collection<Faculty> getAll() {
 
-        return facultyRepository.findAll();
-    }
-
-    public Collection<Faculty> getFacultiesByColor(String color) {
-
-        return facultyRepository.findAll().stream()
-                .filter(f -> f.getColor().equals(color))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public void clear() {
         facultyRepository.deleteAll();
     }

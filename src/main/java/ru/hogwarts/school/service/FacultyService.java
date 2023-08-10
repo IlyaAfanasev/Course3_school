@@ -11,13 +11,15 @@ public interface FacultyService {
 
     Optional<Faculty> getFaculty(Long id);
 
-    Faculty editFaculty(Faculty faculty);
-
     Optional<Faculty> deleteFaculty(Long id);
 
     Collection<Faculty> getAll();
 
-    Collection<Faculty> getFacultiesByColor(String color);
+    Collection<Faculty> getByNameOrColor(String name, String color);
+
+    Faculty editFaculty(Faculty faculty);
+
+    Collection<Faculty> getFacultiesByColor(String name);
 
     void clear();
 

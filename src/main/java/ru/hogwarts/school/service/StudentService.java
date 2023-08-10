@@ -10,6 +10,7 @@ public interface StudentService {
     Student createStudent(Student student);
 
     Optional<Student> getStudent(Long id);
+    Collection<Student> findByAgeBetween(int fromAge, int toAge);
 
     Student editStudent(Student student);
 
