@@ -3,16 +3,17 @@ package ru.hogwarts.school.service;
 import ru.hogwarts.school.model.Student;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public interface StudentService {
 
     Student createStudent(Student student);
 
-    Student getStudent(Long id);
+    Optional<Student> getStudent(Long id);
 
     Student editStudent(Student student);
 
-    Student deleteStudent(Long id);
+    Optional<Student> deleteStudent(Long id);
 
     Collection<Student> getAll();
 

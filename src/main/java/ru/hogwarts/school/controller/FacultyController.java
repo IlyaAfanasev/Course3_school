@@ -7,6 +7,7 @@ import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.service.FacultyService;
 import ru.hogwarts.school.service.FacultyServiceImpl;
 import java.util.Collection;
+import java.util.Optional;
 
 
 @RestController
@@ -28,18 +29,14 @@ public class FacultyController {
     @PutMapping
     public ResponseEntity <Faculty> editFaculty(@RequestBody Faculty faculty) {
         Faculty foundFaculty = facultyService.editFaculty(faculty);
-        if (foundFaculty == null) {
-            return ResponseEntity.badRequest().build();
-        }
+
         return ResponseEntity.ok(faculty);
     }
 
     @DeleteMapping({"{id}"})
-    public ResponseEntity <Faculty> deleteFaculty(@PathVariable Long id) {
-        Faculty faculty = facultyService.deleteFaculty(id);
-        if (faculty == null) {
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity <Optional<Faculty>> deleteFaculty(@PathVariable Long id) {
+        Optional<Faculty> faculty = facultyService.deleteFaculty(id);
+
 
         return ResponseEntity.ok(faculty);
     }
@@ -51,11 +48,9 @@ public class FacultyController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Faculty> getFaculty(@PathVariable Long id) {
-        Faculty faculty = facultyService.getFaculty(id);
-        if (faculty == null) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Optional<Faculty>> getFaculty(@PathVariable Long id) {
+        Optional<Faculty> faculty = facultyService.getFaculty(id);
+
         return ResponseEntity.ok(faculty);
     }
 
