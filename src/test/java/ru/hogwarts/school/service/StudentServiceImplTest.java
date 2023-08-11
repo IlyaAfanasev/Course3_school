@@ -2,6 +2,7 @@ package ru.hogwarts.school.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.hogwarts.school.constant.FacultyServiceConstants;
 import ru.hogwarts.school.exceptions.StudentNotFoundException;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
@@ -52,7 +53,7 @@ public class StudentServiceImplTest {
     public void shouldCorrectResultFromMethodEditStudent() {
         when(studentRepositoryMock.existsById(anyLong())).thenReturn(true);
 
-        Student expected = new Student(2L, "Student4", 12);
+        Student expected = new Student(2L, "Student4", 12, FacultyServiceConstants.FACULTY_1);
 
         when(studentRepositoryMock.save(expected)).thenReturn(expected);
 

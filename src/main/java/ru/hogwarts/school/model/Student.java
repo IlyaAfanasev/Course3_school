@@ -1,7 +1,6 @@
 package ru.hogwarts.school.model;
 
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -15,9 +14,9 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
-    private  String name;
+    private String name;
 
-    private  int age;
+    private int age;
 
     @ManyToOne
     @JoinColumn(name = "faculty_id")
@@ -27,10 +26,11 @@ public class Student {
 
     }
 
-    public Student(Long id, String name, int age) {
+    public Student(Long id, String name, int age, Faculty faculty) {
         this.id = id;
         this.name = name;
         this.age = age;
+        this.faculty = faculty;
     }
 
     public Faculty getFaculty() {
@@ -76,6 +76,7 @@ public class Student {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
+                ",faculty" + faculty.getId() +
                 '}';
     }
 }
