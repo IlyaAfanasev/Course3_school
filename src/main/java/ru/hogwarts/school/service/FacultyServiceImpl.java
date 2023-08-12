@@ -50,6 +50,9 @@ public class FacultyServiceImpl implements FacultyService {
     }
 
     public Collection<Student> getStudentsOnFacultyById(Long id) {
+        if (!facultyRepository.existsById(id)) {
+            throw new FacultyNotFoundException("Faculty not found");
+        }
         return facultyRepository.findById(id).get().getStudents();
     }
     public Faculty editFaculty(Faculty faculty) {

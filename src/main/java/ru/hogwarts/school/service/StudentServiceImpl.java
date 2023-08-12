@@ -56,6 +56,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     public Faculty getFacultyByStudentId(Long id) {
+        if (!studentRepository.existsById(id)) {
+            throw new StudentNotFoundException("Student not found");
+        }
        return studentRepository.findById(id).get().getFaculty();
     }
 

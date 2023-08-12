@@ -48,10 +48,10 @@ public class FacultyController {
     }
 
     @GetMapping("/getStudents/{id}")
-    public ResponseEntity<Collection<Student>> getStudents(@PathVariable Long id) {
+    public Collection<Student> getStudents(@PathVariable Long id) {
         Collection<Student> students = facultyService.getStudentsOnFacultyById(id);
 
-        return ResponseEntity.ok(students);
+        return students;
     }
 
 
