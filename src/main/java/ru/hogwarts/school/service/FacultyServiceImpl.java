@@ -3,6 +3,7 @@ package ru.hogwarts.school.service;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.exceptions.FacultyNotFoundException;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.FacultyRepository;
 
 import java.util.*;
@@ -32,6 +33,28 @@ public class FacultyServiceImpl implements FacultyService {
 
     }
 
+    public Collection<Faculty> getAll() {
+
+        return facultyRepository.findAll();
+    }
+
+    public Collection<Faculty> getFacultiesByColor(String color) {
+
+        return facultyRepository.findAll().stream()
+                .filter(f -> f.getColor().equals(color))
+                .collect(Collectors.toList());
+    }
+
+    public Collection<Faculty> getByNameOrColor(String name, String color) {
+        return facultyRepository.findByNameIgnoreCaseOrColorIgnoreCase(name, color);
+    }
+
+    public Collection<Student> getStudentsOnFacultyById(Long id) {
+        if (!facultyRepository.existsById(id)) {
+            throw new FacultyNotFoundException("Faculty not found");
+        }
+        return facultyRepository.findById(id).get().getStudents();
+    }
     public Faculty editFaculty(Faculty faculty) {
         if (!facultyRepository.existsById(faculty.getId())) {
             throw new FacultyNotFoundException("Faculty not found");
@@ -51,19 +74,7 @@ public class FacultyServiceImpl implements FacultyService {
 
     }
 
-    public Collection<Faculty> getAll() {
 
-        return facultyRepository.findAll();
-    }
-
-    public Collection<Faculty> getFacultiesByColor(String color) {
-
-        return facultyRepository.findAll().stream()
-                .filter(f -> f.getColor().equals(color))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public void clear() {
         facultyRepository.deleteAll();
     }

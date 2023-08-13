@@ -4,6 +4,7 @@ package ru.hogwarts.school.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 import ru.hogwarts.school.service.StudentServiceImpl;
@@ -33,6 +34,31 @@ public class StudentController {
 
         return ResponseEntity.ok(student);
     }
+    @GetMapping("/getfaculty/{id}")
+    public Faculty getFaculty(@PathVariable Long id) {
+        Faculty faculty = studentService.getFacultyByStudentId(id);
+
+        return faculty;
+    }
+
+    @GetMapping
+
+    public Collection<Student> geAll(@RequestParam(required = false) Integer fromAge,
+                                     @RequestParam(required = false) Integer toAge) {
+        if (fromAge != null && toAge != null) {
+            return studentService.findByAgeBetween(fromAge,toAge);
+        }
+
+        return studentService.getAll();
+    }
+
+    @GetMapping("/age")
+    public ResponseEntity<Collection<Student>> getStudentsByAge(@RequestParam int age) {
+        if (age > 0) {
+            return ResponseEntity.ok(studentService.getStudentsByAge(age));
+        }
+        return ResponseEntity.notFound().build();
+    }
 
     @PutMapping
     public ResponseEntity<Student> editFaculty(@RequestBody Student student) {
@@ -47,20 +73,6 @@ public class StudentController {
 
 
         return ResponseEntity.ok(student);
-    }
-
-    @GetMapping
-
-    public Collection<Student> geAll() {
-        return studentService.getAll();
-    }
-
-    @GetMapping("/age")
-    public ResponseEntity<Collection<Student>> getStudentsByAge(@RequestParam int age) {
-        if (age > 0) {
-            return ResponseEntity.ok(studentService.getStudentsByAge(age));
-        }
-        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping
