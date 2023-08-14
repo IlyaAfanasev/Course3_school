@@ -1,7 +1,5 @@
 package ru.hogwarts.school.model;
 
-import org.springframework.beans.factory.annotation.Value;
-
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Objects;
@@ -14,12 +12,12 @@ public class Avatar {
     private String filePath;
     private long fileSize;
     private String mediaType;
+    @Lob
     private byte[] data;
 
-    @Value("${path.to.avatars.folder}")
-    private String avatarsDir;
+
     @OneToOne
-    @JoinColumn(name = "student_id")
+//    @JoinColumn(name = "student_id")
     private Student student;
 
     public Avatar() {
