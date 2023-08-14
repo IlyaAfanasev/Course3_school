@@ -5,4 +5,5 @@ select * from student where name like '%o%'
 select * from student where "age" < "id"
 select * from student order by "age"
 select * from faculty where "id" is not null
+select *from avatar
 
