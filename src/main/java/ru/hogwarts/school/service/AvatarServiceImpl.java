@@ -14,7 +14,10 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.AvatarRepository;
 import ru.hogwarts.school.repository.StudentRepository;
 
+import javax.imageio.ImageIO;
 import javax.transaction.Transactional;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 
 import java.nio.file.Files;
@@ -57,7 +60,7 @@ public class AvatarServiceImpl implements AvatarService {
         avatar.setFilePath(filePath.toString());
         avatar.setFileSize(avatarFile.getSize());
         avatar.setMediaType(avatarFile.getContentType());
-        avatar.setData(avatarFile.getBytes());
+        avatar.setData(generateImagePreview(filePath));
         avatarRepository.save(avatar);
     }
 
@@ -68,6 +71,21 @@ public class AvatarServiceImpl implements AvatarService {
         headers.setContentType(MediaType.parseMediaType(avatar.getMediaType()));
         headers.setContentLength(avatar.getData().length);
         return ResponseEntity.status(HttpStatus.OK).headers(headers).body(avatar.getData());
+    }
+
+    private byte[] generateImagePreview(Path filePath) throws IOException {
+        try (InputStream is = Files.newInputStream(filePath);
+             BufferedInputStream bis = new BufferedInputStream(is, 1024);
+             ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+            BufferedImage image = ImageIO.read(bis);
+            int height = image.getHeight() / (image.getWidth() / 100);
+            BufferedImage preview = new BufferedImage(100, height, image.getType());
+            Graphics2D graphics = preview.createGraphics();
+            graphics.drawImage(image, 0, 0, 100, height, null);
+            graphics.dispose();
+            ImageIO.write(preview, getExtensions(filePath.getFileName().toString()), baos);
+            return baos.toByteArray();
+        }
     }
 
 
