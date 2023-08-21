@@ -1,6 +1,7 @@
 package ru.hogwarts.school.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
@@ -20,11 +21,14 @@ public class Student {
 
     @ManyToOne
     @JoinColumn(name = "faculty_id")
+    @JsonIgnore
     private Faculty faculty;
 
     public Student() {
 
     }
+
+
 
     public Student(Long id, String name, int age, Faculty faculty) {
         this.id = id;
@@ -53,8 +57,16 @@ public class Student {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public int getAge() {
         return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     @Override
