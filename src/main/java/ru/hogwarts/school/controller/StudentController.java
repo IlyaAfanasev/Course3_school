@@ -29,7 +29,7 @@ public class StudentController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity <Optional<Student>> getStudent(@PathVariable Long id) {
+    public ResponseEntity <Optional<Student>> getStudentById(@PathVariable Long id) {
         Optional<Student> student = studentService.getStudent(id);
 
         return ResponseEntity.ok(student);
@@ -54,14 +54,22 @@ public class StudentController {
 
     @GetMapping("/age")
     public ResponseEntity<Collection<Student>> getStudentsByAge(@RequestParam int age) {
-        if (age > 0) {
-            return ResponseEntity.ok(studentService.getStudentsByAge(age));
+
+        if (age <= 0) {
+
+            return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.notFound().build();
+        if (studentService.getStudentsByAge(age).isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+            return ResponseEntity.ok(studentService.getStudentsByAge(age));
+
+
     }
 
     @PutMapping
-    public ResponseEntity<Student> editFaculty(@RequestBody Student student) {
+    public ResponseEntity<Student> editStudent(@RequestBody Student student) {
         Student foundStudent = studentService.editStudent(student);
 
         return ResponseEntity.ok(student);
