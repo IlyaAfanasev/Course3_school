@@ -28,8 +28,8 @@ public class FacultyController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Optional<Faculty>> getFaculty(@PathVariable Long id) {
-        Optional<Faculty> faculty = facultyService.getFaculty(id);
+    public ResponseEntity<Optional<Faculty>> getFacultyById(@PathVariable Long id) {
+        Optional<Faculty> faculty = facultyService.getFacultyById(id);
 
         return ResponseEntity.ok(faculty);
     }

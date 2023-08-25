@@ -34,7 +34,7 @@ public class StudentController {
 
         return ResponseEntity.ok(student);
     }
-    @GetMapping("/getfaculty/{id}")
+    @GetMapping("getfaculty/{id}")
     public Faculty getFaculty(@PathVariable Long id) {
         Faculty faculty = studentService.getFacultyByStudentId(id);
 
