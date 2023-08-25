@@ -81,4 +81,14 @@ public class Faculty {
                 ", color='" + color + '\'' +
                 '}';
     }
+
+    public String toJson() {
+        return "{" +
+                "id=" +  id + ", " +
+                "name=" + name  + ", "
+                + "color="  + color  +
+                        '}';
+
+        }
+
 }
