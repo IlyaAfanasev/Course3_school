@@ -14,12 +14,13 @@ import ru.hogwarts.school.controller.FacultyController;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.repository.FacultyRepository;
 import ru.hogwarts.school.service.FacultyService;
+import ru.hogwarts.school.service.FacultyServiceImpl;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
+@WebMvcTest(FacultyController.class)
 public class SchoolApplicationWithMockTest {
     @Autowired
     private MockMvc mockMvc;
@@ -28,7 +29,7 @@ public class SchoolApplicationWithMockTest {
     private FacultyRepository facultyRepository;
 
     @SpyBean
-    private FacultyService facultyService;
+    private FacultyServiceImpl facultyService;
 
     @InjectMocks
     private FacultyController facultyController;
