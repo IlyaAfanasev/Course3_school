@@ -6,4 +6,5 @@ select * from student where "age" < "id"
 select * from student order by "age"
 select * from faculty where "id" is not null
 select *from avatar
+select * from student where "id" = 3
 

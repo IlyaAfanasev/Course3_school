@@ -65,6 +65,14 @@ public class Faculty {
         return Objects.hash(name);
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     @Override
     public String toString() {
         return "Faculty{" +
@@ -73,4 +81,14 @@ public class Faculty {
                 ", color='" + color + '\'' +
                 '}';
     }
+
+    public String toJson() {
+        return "{" +
+                "id=" +  id + ", " +
+                "name=" + name  + ", "
+                + "color="  + color  +
+                        '}';
+
+        }
+
 }

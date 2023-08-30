@@ -36,7 +36,7 @@ public class FacultyServiceImplTest {
     public void shouldCorrectResultFromMethodGetFaculty() {
         when(facultyRepositoryMock.existsById(anyLong())).thenReturn(true);
         when(facultyRepositoryMock.findById(anyLong())).thenReturn(Optional.of(FACULTY_2));
-        assertEquals(Optional.of(FACULTY_2), out.getFaculty(2L));
+        assertEquals(Optional.of(FACULTY_2), out.getFacultyById(2L));
         verify(facultyRepositoryMock, times(1)).existsById(anyLong());
         verify(facultyRepositoryMock, times(1)).findById(anyLong());
     }
@@ -45,7 +45,7 @@ public class FacultyServiceImplTest {
     @Test
     public void shouldThrowFacultyNotFoundFromMethodGetFaculty() {
         when(facultyRepositoryMock.existsById(anyLong())).thenReturn(false);
-        assertThrows(FacultyNotFoundException.class, () -> out.getFaculty(3L));
+        assertThrows(FacultyNotFoundException.class, () -> out.getFacultyById(3L));
         verify(facultyRepositoryMock, times(1)).existsById(anyLong());
 
     }

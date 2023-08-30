@@ -10,7 +10,7 @@ public interface FacultyService {
 
     Faculty createFaculty(Faculty faculty);
 
-    Optional<Faculty> getFaculty(Long id);
+    Optional<Faculty> getFacultyById(Long id);
 
     Optional<Faculty> deleteFaculty(Long id);
 

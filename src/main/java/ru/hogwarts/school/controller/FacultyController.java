@@ -22,9 +22,14 @@ public class FacultyController {
         this.facultyService = facultyService;
     }
 
+    @PostMapping
+    public Faculty createFaculty(@RequestBody Faculty faculty) {
+        return facultyService.createFaculty(faculty);
+    }
+
     @GetMapping("{id}")
-    public ResponseEntity<Optional<Faculty>> getFaculty(@PathVariable Long id) {
-        Optional<Faculty> faculty = facultyService.getFaculty(id);
+    public ResponseEntity<Optional<Faculty>> getFacultyById(@PathVariable Long id) {
+        Optional<Faculty> faculty = facultyService.getFacultyById(id);
 
         return ResponseEntity.ok(faculty);
     }
@@ -54,11 +59,6 @@ public class FacultyController {
         return students;
     }
 
-
-    @PostMapping
-    public Faculty createFaculty(@RequestBody Faculty faculty) {
-        return facultyService.createFaculty(faculty);
-    }
 
     @PutMapping
     public ResponseEntity <Faculty> editFaculty(@RequestBody Faculty faculty) {

@@ -25,7 +25,7 @@ public class FacultyServiceImpl implements FacultyService {
 
     }
 
-    public Optional<Faculty> getFaculty(Long id) {
+    public Optional<Faculty> getFacultyById(Long id) {
         if (!facultyRepository.existsById(id)) {
             throw new FacultyNotFoundException("Faculty not found");
         }
