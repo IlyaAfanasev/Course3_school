@@ -10,6 +10,7 @@ import ru.hogwarts.school.service.StudentService;
 import ru.hogwarts.school.service.StudentServiceImpl;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -28,6 +29,20 @@ public class StudentController {
         return studentService.createStudent(student);
     }
 
+    @GetMapping("/getNumberOfStudents")
+    public int getNumberOfStudents() {
+        return studentService.getNumberOfStudents();
+    }
+
+    @GetMapping("/avg_age")
+    public int getAverageAgeOfStudents() {
+        return studentService.getAverageAgeOfStudents();
+    }
+
+    @GetMapping("/last_5_students")
+    public List<Student> getLast_5_Student() {
+        return studentService.getLast_5_Student();
+    }
     @GetMapping("{id}")
     public ResponseEntity <Optional<Student>> getStudentById(@PathVariable Long id) {
         Optional<Student> student = studentService.getStudent(id);

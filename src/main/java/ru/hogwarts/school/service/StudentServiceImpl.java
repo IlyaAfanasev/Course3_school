@@ -27,6 +27,21 @@ public class StudentServiceImpl implements StudentService {
 
     }
 
+    @Override
+    public int getNumberOfStudents() {
+        return studentRepository.getNumberOfStudents();
+    }
+
+    @Override
+    public int getAverageAgeOfStudents() {
+        return studentRepository.getAverageAgeOfStudents();
+    }
+
+    @Override
+    public List<Student> getLast_5_Student() {
+        return studentRepository.getLast_5_Student();
+    }
+
     public Optional<Student> getStudent(Long id) {
         if (!studentRepository.existsById(id)) {
             throw new StudentNotFoundException("Student not found");
