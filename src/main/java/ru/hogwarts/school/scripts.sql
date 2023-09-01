@@ -8,3 +8,4 @@ select * from faculty where "id" is not null
 select *from avatar
 select * from student where "id" = 3
 
+
