@@ -7,5 +7,6 @@ select * from student order by "age"
 select * from faculty where "id" is not null
 select *from avatar
 select * from student where "id" = 3
+insert into student values (13, 20, 'Test Student', null )
 
 
