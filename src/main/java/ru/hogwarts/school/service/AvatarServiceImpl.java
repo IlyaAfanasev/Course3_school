@@ -103,7 +103,7 @@ public class AvatarServiceImpl implements AvatarService {
     }
 
     @Override
-    public List<Avatar> getPageOfAvatar(Integer pageNumber, Integer pageSize) {
+    public List<Avatar> getPageOfAvatars(Integer pageNumber, Integer pageSize) {
         PageRequest pageRequest = PageRequest.of(pageNumber - 1, pageSize);
         return avatarRepository.findAll(pageRequest).getContent();
     }

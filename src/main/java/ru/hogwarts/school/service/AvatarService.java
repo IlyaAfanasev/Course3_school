@@ -14,6 +14,6 @@ public interface AvatarService {
 
 
 
-    List<Avatar> getPageOfAvatar(Integer pageNumber, Integer pageSize);
+    List<Avatar> getPageOfAvatars(Integer pageNumber, Integer pageSize);
 
 }
