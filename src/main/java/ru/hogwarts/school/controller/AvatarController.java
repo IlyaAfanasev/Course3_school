@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school.model.Avatar;
 import ru.hogwarts.school.service.AvatarService;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collection;
+
 
 @RestController
 @RequestMapping("/avatar")
@@ -43,12 +44,20 @@ public class AvatarController {
         return ResponseEntity.status(HttpStatus.OK).headers(headers).body(avatar.getData());
     }
 
+    @GetMapping("/pageAvatars")
+    public Collection<Avatar> getAvatar(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+
+       return avatarService.getPageOfAvatars(pageNumber, pageSize);
+
+    }
+
+
     @GetMapping(value = "/{id}/avatar-from-file")
     public void downloadAvatar(@PathVariable Long id, HttpServletResponse response) throws IOException{
         Avatar avatar = avatarService.findAvatar(id);
         Path path = Path.of(avatar.getFilePath());
         try(InputStream is = Files.newInputStream(path);
-            OutputStream os = response.getOutputStream();) {
+            OutputStream os = response.getOutputStream()) {
             response.setStatus(200);
             response.setContentType(avatar.getMediaType());
             response.setContentLength((int) avatar.getFileSize());
@@ -57,7 +66,5 @@ public class AvatarController {
     }
 
 
-
-
-
 }
+
