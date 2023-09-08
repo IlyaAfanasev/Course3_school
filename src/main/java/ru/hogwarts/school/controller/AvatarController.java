@@ -1,5 +1,7 @@
 package ru.hogwarts.school.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,6 +22,7 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/avatar")
 public class AvatarController {
+    Logger logger = LoggerFactory.getLogger(AvatarController.class);
 
     private final AvatarService avatarService;
 
@@ -54,6 +57,7 @@ public class AvatarController {
 
     @GetMapping(value = "/{id}/avatar-from-file")
     public void downloadAvatar(@PathVariable Long id, HttpServletResponse response) throws IOException{
+        logger.info("Was invoked method for output of Avatar from file");
         Avatar avatar = avatarService.findAvatar(id);
         Path path = Path.of(avatar.getFilePath());
         try(InputStream is = Files.newInputStream(path);
