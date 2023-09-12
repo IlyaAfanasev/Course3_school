@@ -29,4 +29,9 @@ public interface StudentService {
     Optional<Student> deleteStudent(Long id);
 
     void clear();
+
+    Collection<String> getSortedStudentsWithNameStarts_A();
+
+    String getAverageAgeOfStudentsByFindAll();
 }
+

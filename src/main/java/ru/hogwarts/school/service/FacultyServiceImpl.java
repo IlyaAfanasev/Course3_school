@@ -95,5 +95,14 @@ public class FacultyServiceImpl implements FacultyService {
         facultyRepository.deleteAll();
     }
 
+    @Override
+    public String getLongestNameOfFaculty() {
+        logger.info("Was invoked method for get Faculty with the longest name");
+        return facultyRepository.findAll().stream()
+                .map(Faculty::getName)
+                .max(Comparator.comparingInt(String::length)).get();
+
+    }
+
 
 }
