@@ -132,8 +132,8 @@ public class StudentServiceImpl implements StudentService {
                 .stream()
                 .parallel()
                 .filter(s -> s.getName().startsWith("A"))
-                .sorted(Comparator.comparing(Student::getName))
                 .map(Student::getName)
+                .sorted()
                 .collect(Collectors.toList());
     }
 
