@@ -37,7 +37,34 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public int getNumberOfStudents() {
         logger.info("Was invoked method for get number of students ");
+
+        List<Student> studentList = new ArrayList<>(studentRepository.findAll());
+
+        for (int i = 0; i < 2; i++) {
+            printStudent(studentList.get(i));
+        }
+        new Thread(()->{
+            for (int i = 2; i <4 ; i++) {
+                printStudent(studentList.get(i));
+
+            }
+        }).start();
+        new Thread(()->{
+            for (int i = 4; i <6 ; i++) {
+                printStudent(studentList.get(i));
+
+            }
+        }).start();
+
         return studentRepository.getNumberOfStudents();
+    }
+    private void printStudent(Student student) {
+
+        synchronized (student) {
+
+            System.out.println(student.getName()+" "+student.getId());
+
+        }
     }
 
     @Override
@@ -64,8 +91,37 @@ public class StudentServiceImpl implements StudentService {
 
     public Collection<Student> getAll() {
         logger.info("Was invoked method for get all students ");
+        Collection<Student> studentCollection = studentRepository.findAll();
 
-        return studentRepository.findAll();
+        List<Student> studentList = new ArrayList<>(studentCollection);
+        for (int i = 0; i < 2; i++) {
+
+        }
+        new Thread(()->{
+            for (int i = 2; i < 4; i++) {
+
+                System.out.println(studentList.get(i).getName()+" "+studentList.get(i).getId());
+                try {
+                    Thread.sleep(800);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } ).start();
+        new Thread(()->{
+            for (int i = 4; i < 6; i++) {
+
+                System.out.println(studentList.get(i).getName()+" "+studentList.get(i).getId());
+                try {
+                    Thread.sleep(800);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } ).start();
+
+
+        return studentCollection;
     }
 
     public Collection<Student> getStudentsByAge(int age) {
