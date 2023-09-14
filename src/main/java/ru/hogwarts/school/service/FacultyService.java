@@ -26,4 +26,6 @@ public interface FacultyService {
 
     void clear();
 
+    String getLongestNameOfFaculty();
+
 }

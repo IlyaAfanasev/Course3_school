@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
-import ru.hogwarts.school.service.StudentServiceImpl;
 
 import java.util.Collection;
 import java.util.List;
@@ -34,8 +33,19 @@ public class StudentController {
         return studentService.getNumberOfStudents();
     }
 
+    @GetMapping("/name_A")
+    public Collection<String> getSortedStudentsWithNameStarts_A() {
+        return studentService.getSortedStudentsWithNameStarts_A();
+    }
+
+    @GetMapping("/avg_age_withFindAll")
+    public String getAverageAgeOfStudentsByFindAll() {
+        return studentService.getAverageAgeOfStudentsByFindAll();
+    }
+
     @GetMapping("/avg_age")
     public int getAverageAgeOfStudents() {
+
         return studentService.getAverageAgeOfStudents();
     }
 

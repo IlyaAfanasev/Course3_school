@@ -1,6 +1,7 @@
 package ru.hogwarts.school.service;
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import ru.hogwarts.school.exceptions.StudentNotFoundException;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
+import static org.apache.commons.lang3.StringUtils.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -121,5 +123,24 @@ public class StudentServiceImpl implements StudentService {
     public void clear() {
         logger.info("Was invoked method for clear table student");
         studentRepository.deleteAll();
+    }
+
+    @Override
+    public Collection<String> getSortedStudentsWithNameStarts_A() {
+
+        return studentRepository.findAll()
+                .stream()
+                .parallel()
+                .filter(s -> s.getName().startsWith("A"))
+                .map(Student::getName)
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public String getAverageAgeOfStudentsByFindAll() {
+        int avgAge =(int)studentRepository.findAll()
+                    .stream().mapToInt(Student::getAge).average().getAsDouble();
+        return "Средний возраст студентов "+avgAge;
     }
 }
